@@ -1,21 +1,21 @@
 [Unit]
-Description=Kiro Proxy — Anthropic-compatible gateway for Kiro PRO
-After=network.target
+Description=Kiro Proxy - Anthropic-compatible gateway for Kiro PRO
+After=network.target xray.service tun2socks.service
 
 [Service]
 Type=simple
-User=kiro
+User=root
 WorkingDirectory=/opt/kiro-proxy
 ExecStart=/opt/kiro-proxy/bin/kiro-proxy
 Restart=on-failure
 RestartSec=5
 
-Environment=KIRO_API_KEY=ksk_YOUR_KEY_HERE
+Environment=KIRO_API_KEY=YOUR_KIRO_API_KEY
 Environment=KIRO_CLI_PATH=/usr/local/bin/kiro-cli
 Environment=LISTEN_ADDR=:8080
 
-StandardOutput=append:/var/log/kiro-proxy/proxy.log
-StandardError=append:/var/log/kiro-proxy/proxy.log
+StandardOutput=append:/opt/kiro-proxy/logs/proxy.log
+StandardError=append:/opt/kiro-proxy/logs/proxy.log
 
 [Install]
 WantedBy=multi-user.target

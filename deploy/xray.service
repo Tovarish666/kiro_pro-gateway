@@ -1,0 +1,11 @@
+[Unit]
+Description=Xray Service (VLESS+Reality client)
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/xray run -config /etc/xray/config.json
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

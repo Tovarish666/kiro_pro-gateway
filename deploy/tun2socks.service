@@ -1,0 +1,16 @@
+[Unit]
+Description=tun2socks VPN tunnel
+After=network-online.target xray.service
+Wants=network-online.target
+Requires=xray.service
+
+[Service]
+Type=simple
+ExecStart=/opt/kiro-proxy/start-tun.sh
+ExecStartPost=/opt/kiro-proxy/vpn-routes.sh
+Restart=on-failure
+RestartSec=5
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
