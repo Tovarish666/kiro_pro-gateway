@@ -1,0 +1,78 @@
+{
+  "gateway": {
+    "mode": "local",
+    "port": 18789,
+    "auth": {
+      "mode": "token",
+      "token": "your-secret-token-here"
+    },
+    "remote": {
+      "token": "your-secret-token-here"
+    },
+    "controlUi": {
+      "allowedOrigins": [
+        "http://localhost:18789",
+        "http://127.0.0.1:18789",
+        "http://YOUR_LAN_IP:18789"
+      ]
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "kiro": {
+        "baseUrl": "http://localhost:8080/v1",
+        "apiKey": "ksk_YOUR_API_KEY_HERE",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "claude-opus-4-7",
+            "name": "Claude Opus 4.7 (via Kiro)",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "contextTokens": 180000,
+            "maxTokens": 4096
+          },
+          {
+            "id": "claude-sonnet-4-6",
+            "name": "Claude Sonnet 4.6 (via Kiro)",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 200000,
+            "contextTokens": 180000,
+            "maxTokens": 4096
+          }
+        ]
+      },
+      "openrouter": {
+        "baseUrl": "https://openrouter.ai/api/v1",
+        "apiKey": "sk-or-YOUR_OPENROUTER_KEY",
+        "api": "openai-chat",
+        "models": [
+          {
+            "id": "anthropic/claude-opus-4",
+            "name": "Claude Opus 4 (OpenRouter)",
+            "contextWindow": 200000,
+            "maxTokens": 4096
+          },
+          {
+            "id": "openai/gpt-4o",
+            "name": "GPT-4o (OpenRouter)",
+            "contextWindow": 128000,
+            "maxTokens": 4096
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "kiro/claude-opus-4-7"
+      }
+    }
+  }
+}
